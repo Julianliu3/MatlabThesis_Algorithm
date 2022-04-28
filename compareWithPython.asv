@@ -1,0 +1,46 @@
+clc;
+clear;
+ValenceArray = [];
+ArousalArray = [];
+for val = 10:5:30
+    tempVal = zeros(1,300);
+    tempArousal = zeros(1,300);
+    LMVal = landMarkfunc('valence', 1,val);
+    LMArousal = landMarkfunc('arousal', 1,val);
+    for i = 1:1:300
+        if(ismember(i,LMVal))
+            tempVal(i) = 1;
+        else
+            tempVal(i) = 0;
+        end
+        if(ismember(i,LMArousal))
+            tempArousal(i) = 1;
+        else
+            tempArousal(i) = 0;
+        end
+    end
+    ValenceArray = [ValenceArray;tempVal];
+    ArousalArray = [ArousalArray;tempArousal];
+end
+
+x = linspace(1,300,300);
+
+subplot(5,2,1)
+plot(x,ArousalArray(1,:))
+title('Subplot 1: sin(x)')
+
+subplot(5,2,2)
+y2 = sin(2*x);
+plot(x,y2)
+title('Subplot 2: sin(2x)')
+
+subplot(2,2,3)
+y3 = sin(4*x);
+plot(x,y3)
+title('Subplot 3: sin(4x)')
+
+subplot(2,2,4)
+y4 = sin(8*x);
+plot(x,y4)
+title('Subplot 4: sin(8x)')
+
